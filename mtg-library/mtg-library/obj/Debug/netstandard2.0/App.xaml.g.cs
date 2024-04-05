@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("mtg-library.App.xaml", "App.xaml", typeof(global::mtg_library.App))]
+[assembly: global::Xamarin.Forms.Xaml.XamlResourceIdAttribute("mtg_library.App.xaml", "App.xaml", typeof(global::mtg_library.App))]
 
 namespace mtg_library {
     

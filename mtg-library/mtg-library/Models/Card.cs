@@ -27,7 +27,7 @@ namespace mtg_library.Models
         public CardImageUris ImageUris { get; set; }
         public string ManaCost { get; set; }
         [JsonProperty("cmc")]
-        public int ConvertedManaCost { get; set; }
+        public double ConvertedManaCost { get; set; }
         public string TypeLine { get; set; }
         public string OracleText { get; set; }
         public string Power { get; set; }
@@ -68,8 +68,9 @@ namespace mtg_library.Models
         public bool StorySpotlight { get; set; }
         public int EDHRank { get; set; }
         public int PennyRank { get; set; }
-        public 
-
+        public CardPrices Prices { get; set; }
+        public CardRelatedUris RelatedUris { get; set; }
+        public CardPurchaseUris PurchaseUris { get; set; }
 
         public class CardImageUris
         {
@@ -111,27 +112,27 @@ namespace mtg_library.Models
             public string Premodern { get; set; }
             public string Predh { get; set; }
         }
-    {
-  "edhrec_rank": 9904,
-  "penny_rank": 4846,
-  "prices": {
-    "usd": "4.24",
-    "usd_foil": "20.26",
-    "usd_etched": null,
-    "eur": "4.49",
-    "eur_foil": "32.71",
-    "tix": "0.18"
-  },
-  "related_uris": {
-    "gatherer": "https://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=37113&printed=false",
-    "tcgplayer_infinite_articles": "https://tcgplayer.pxf.io/c/4931599/1830156/21018?subId1=api&trafcat=infinite&u=https%3A%2F%2Finfinite.tcgplayer.com%2Fsearch%3FcontentMode%3Darticle%26game%3Dmagic%26partner%3Dscryfall%26q%3DPhantom%2BNishoba",
-    "tcgplayer_infinite_decks": "https://tcgplayer.pxf.io/c/4931599/1830156/21018?subId1=api&trafcat=infinite&u=https%3A%2F%2Finfinite.tcgplayer.com%2Fsearch%3FcontentMode%3Ddeck%26game%3Dmagic%26partner%3Dscryfall%26q%3DPhantom%2BNishoba",
-    "edhrec": "https://edhrec.com/route/?cc=Phantom+Nishoba"
-  },
-  "purchase_uris": {
-    "tcgplayer": "https://tcgplayer.pxf.io/c/4931599/1830156/21018?subId1=api&u=https%3A%2F%2Fwww.tcgplayer.com%2Fproduct%2F10190%3Fpage%3D1",
-    "cardmarket": "https://www.cardmarket.com/en/Magic/Products/Singles/Judgment/Phantom-Nishoba?referrer=scryfall&utm_campaign=card_prices&utm_medium=text&utm_source=scryfall",
-    "cardhoarder": "https://www.cardhoarder.com/cards/17622?affiliate_id=scryfall&ref=card-profile&utm_campaign=affiliate&utm_medium=card&utm_source=scryfall"
-  }
-}
+        public class CardPrices
+        {
+            public double USD { get; set; }
+            public double USDFoil { get; set; }
+            public double USDEtched { get; set; }
+            public double EUR { get; set; }
+            public double EURFoil { get; set; }
+            public double TIX { get; set; }
+        }
+        public class CardRelatedUris
+        {
+            public Uri Gatherer { get; set; }
+            public Uri TCGPlayerInfinteArticles { get; set; }
+            public Uri TCGPlayerInfiniteDecks { get; set; }
+            public Uri EDHRec { get; set; }
+        }
+        public class CardPurchaseUris
+        {
+            public Uri TCGPlayer { get; set; }
+            public Uri Cardmarket { get; set; }
+            public Uri Cardhoarder { get; set; }
+        }
+    }
 }
