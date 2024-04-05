@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,6 +8,7 @@ namespace mtg_library.Models
 {
     public class Card
     {
+        [PrimaryKey]
         [JsonProperty("id")]
         public Guid Id { get; set; }
         public Guid OracleId { get; set; }

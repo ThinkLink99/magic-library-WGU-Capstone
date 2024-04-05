@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using mtg_library.Data;
 using mtg_library.Services;
 using mtg_library.ViewModels;
 using System;
@@ -26,6 +27,7 @@ namespace mtg_library
             services.AddTransient<MainPageViewModel>();
 
             // Add services
+            services.AddSingleton<IDataContext, DataContext>();
             services.AddSingleton<ScryfallService>();
 
             ServiceProvider = services.BuildServiceProvider ();

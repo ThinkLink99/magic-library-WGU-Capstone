@@ -7,47 +7,9 @@
         <Frame BackgroundColor="#261538" Padding="20" CornerRadius="0">
             <Label Text="Magic: The Gathering Catalog" HorizontalTextAlignment="Center" TextColor="White" FontSize="30"/>
         </Frame>
+        <Button x:Name="btnCreateNewLibrary" Text="+" Clicked="btnCreateNewLibrary_Clicked" />
         <ScrollView>
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                </Grid.RowDefinitions>
-
-                <Label Text="Trading Cards"
-               FontSize="Large"
-               HorizontalOptions="Center"
-               VerticalOptions="CenterAndExpand" />
-
-                <CollectionView Grid.Row="1"
-                        ItemsSource="{Binding Cards}"
-                        SelectionMode="None">
-                    <CollectionView.ItemsLayout>
-                        <GridItemsLayout Orientation="Vertical"
-                                 Span="2" />
-                    </CollectionView.ItemsLayout>
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <StackLayout>
-                                <yummy:PancakeView Margin="5" CornerRadius="25, 0, 0, 25">
-                                    <Image Source="{Binding ImageUris.ArtCrop}" 
-                                   Aspect="AspectFill" />
-                                    <Image Source="{Binding OverlayImageUrl}" 
-                                           Aspect="AspectFill"
-                                           HorizontalOptions="End"
-                                           VerticalOptions="Start"
-                                           WidthRequest="50"
-                                           HeightRequest="50"
-                                           Margin="0,5,5,0" />
-                                </yummy:PancakeView>
-                                <yummy:PancakeView Margin="5" Padding="5" CornerRadius="0, 0, 25, 25">
-                                    <Label Text="{Binding Name}" />
-                                </yummy:PancakeView>
-                            </StackLayout>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-                </CollectionView>
-            </Grid>
+            
         </ScrollView>
     </StackLayout>
 </ContentPage>

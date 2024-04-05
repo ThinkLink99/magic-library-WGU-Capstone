@@ -24,5 +24,10 @@ namespace mtg_library.Views
         {
             await ViewModel.LoadTestCard();
         }
+
+        private async void btnCreateNewLibrary_Clicked(object sender, EventArgs e)
+        {
+            await ViewModel.CreateNewLibrary();
+        }
     }
 }
