@@ -1,15 +1,17 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             x:Class="mtg_library.Views.MainPage"
+             xmlns:Controls="clr-namespace:mtg_library.Controls" 
+             xmlns:viewmodels="clr-namespace:mtg_library.ViewModels" 
+             x:DataType="viewmodels:HomePageViewModel"
+             x:Class="mtg_library.Views.HomePage"
              Appearing="ContentPage_Appearing">
     <StackLayout>
         <Frame BackgroundColor="#261538" Padding="20" CornerRadius="0">
             <Label Text="Magic: The Gathering Catalog" HorizontalTextAlignment="Center" TextColor="White" FontSize="30"/>
         </Frame>
-        <Button x:Name="btnCreateNewLibrary" Text="+" Clicked="btnCreateNewLibrary_Clicked" />
         <ScrollView>
-            
+            <Controls:CardGridView />
         </ScrollView>
     </StackLayout>
 </ContentPage>

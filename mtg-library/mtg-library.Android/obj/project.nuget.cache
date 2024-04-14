@@ -1,11 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "jrBxJsiu0oPro/sIvfaMdECQtCnE+us2Vsvy3p0LRkFNimvaDJaiapSY9G/uKn/rZRUAWoPy0VL3qAMNqX3d6A==",
+  "dgSpecHash": "n35qOHrwZiw22buC/CjiC+B5X8iE7s3Il/WNCnwi98NHEuZiwpnRNZ44+PrDAO/hFQvvJD2NabU7RKx8uAmPlg==",
   "success": true,
   "projectFilePath": "C:\\Users\\hallt\\OneDrive\\Documents\\GitHub\\magic-library-WGU-Capstone\\mtg-library\\mtg-library.Android\\mtg-library.Android.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\hallt\\.nuget\\packages\\lazycache\\2.4.0\\lazycache.2.4.0.nupkg.sha512",
+    "C:\\Users\\hallt\\.nuget\\packages\\lazycache.aspnetcore\\2.4.0\\lazycache.aspnetcore.2.4.0.nupkg.sha512",
+    "C:\\Users\\hallt\\.nuget\\packages\\microsoft.extensions.caching.abstractions\\2.1.0\\microsoft.extensions.caching.abstractions.2.1.0.nupkg.sha512",
+    "C:\\Users\\hallt\\.nuget\\packages\\microsoft.extensions.caching.memory\\2.1.0\\microsoft.extensions.caching.memory.2.1.0.nupkg.sha512",
     "C:\\Users\\hallt\\.nuget\\packages\\microsoft.extensions.dependencyinjection\\8.0.0\\microsoft.extensions.dependencyinjection.8.0.0.nupkg.sha512",
     "C:\\Users\\hallt\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.0\\microsoft.extensions.dependencyinjection.abstractions.8.0.0.nupkg.sha512",
+    "C:\\Users\\hallt\\.nuget\\packages\\microsoft.extensions.options\\2.1.0\\microsoft.extensions.options.2.1.0.nupkg.sha512",
+    "C:\\Users\\hallt\\.nuget\\packages\\microsoft.extensions.primitives\\2.1.0\\microsoft.extensions.primitives.2.1.0.nupkg.sha512",
     "C:\\Users\\hallt\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\hallt\\.nuget\\packages\\sqlite-net-pcl\\1.9.172\\sqlite-net-pcl.1.9.172.nupkg.sha512",
     "C:\\Users\\hallt\\.nuget\\packages\\sqlitepclraw.bundle_green\\2.1.2\\sqlitepclraw.bundle_green.2.1.2.nupkg.sha512",

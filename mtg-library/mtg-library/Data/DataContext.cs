@@ -5,6 +5,8 @@ using System.IO;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Linq.Expressions;
+using System.Linq;
 
 namespace mtg_library.Data
 {
@@ -20,6 +22,13 @@ namespace mtg_library.Data
                 //_database.CreateTableAsync<Card>().Wait();
                 _database.CreateTableAsync<Library>().Wait();
                 _database.CreateTableAsync<LibraryCard>().Wait();
+
+
+                if (false)
+                {
+                    _database.DeleteAllAsync<Library>().Wait();
+                    _database.DeleteAllAsync<LibraryCard>().Wait();
+                }
             }
             catch (Exception ex)
             {
@@ -32,11 +41,13 @@ namespace mtg_library.Data
         /* Library CRUD Operations */
         public async Task<int> CreateLibraryAsync(DateTime createDate, string status) 
         { 
-            return await _database.InsertAsync(new Library() { Id = new Guid(), CreatedDate = createDate, Status = status });
+            return await _database.InsertAsync(new Library() { Id = Guid.NewGuid(), Name = "New Library", CreatedDate = createDate, Status = status, LastUpdated = createDate });
         }
         public async Task<Library> RetrieveLibraryAsync(string libraryId) 
-        { 
-            return await _database.Table<Library>().Where(L => L.Id.CompareTo(libraryId) == 0).FirstOrDefaultAsync();
+        {
+            var ret = await _database.Table<Library>().ToListAsync();
+            var lib = ret.Where(L => L.Id == Guid.Parse(libraryId)).FirstOrDefault();
+            return lib;
         }
         public async Task<List<Library>> RetrieveLibrariesAsync() 
         { 
@@ -56,13 +67,18 @@ namespace mtg_library.Data
         {
             throw new NotImplementedException();
         }
-        public Task<LibraryCard> RetrieveLibraryCardAsync(string libraryId, string cardId) 
+        public async Task<LibraryCard> RetrieveLibraryCardAsync(string libraryId, string cardId) 
         { 
-            throw new NotImplementedException();
+            return (await _database.Table<LibraryCard>().ToListAsync())
+                                  .Where(L => L.LibraryId == Guid.Parse(libraryId) && 
+                                              L.CardId == Guid.Parse(cardId))
+                                  .FirstOrDefault();
         }
-        public Task<List<LibraryCard>> RetrieveLibraryCardsAsync(string libraryId) 
-        { 
-            throw new NotImplementedException();
+        public async Task<List<LibraryCard>> RetrieveLibraryCardsAsync(string libraryId) 
+        {
+            return (await _database.Table<LibraryCard>().ToListAsync())
+                                  .Where(L => L.LibraryId == Guid.Parse(libraryId))
+                                  .ToList();
         }
         public Task<int> UpdateLibraryCardAsync(LibraryCard libraryCard) 
         { 

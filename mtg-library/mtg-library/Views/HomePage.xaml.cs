@@ -11,23 +11,19 @@ using Xamarin.Forms;
 
 namespace mtg_library.Views
 {
-    public partial class MainPage : ContentPage
+    public partial class HomePage : ContentPage
     {
-        public MainPageViewModel ViewModel => (MainPageViewModel)BindingContext;
-        public MainPage()
+        public HomePageViewModel ViewModel => (HomePageViewModel)BindingContext;
+        public HomePage()
         {
             InitializeComponent();
-            BindingContext = App.GetViewModel<MainPageViewModel>();
+            BindingContext = App.GetViewModel<HomePageViewModel>();
         }
 
         private async void ContentPage_Appearing(object sender, EventArgs e)
         {
-            await ViewModel.LoadTestCard();
         }
 
-        private async void btnCreateNewLibrary_Clicked(object sender, EventArgs e)
-        {
-            await ViewModel.CreateNewLibrary();
-        }
+        
     }
 }

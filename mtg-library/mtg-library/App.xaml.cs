@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using LazyCache;
+using Microsoft.Extensions.DependencyInjection;
 using mtg_library.Data;
 using mtg_library.Services;
 using mtg_library.ViewModels;
@@ -14,7 +15,7 @@ namespace mtg_library
         {
             InitializeComponent();
             ConfigureServices(addPlatformServices);
-            MainPage = new Views.MainPage();
+            MainPage = new NavigationPage(new Views.TabbedMainPage());
         }
 
         void ConfigureServices (Action<IServiceCollection> addPlatformServices = null)
@@ -24,11 +25,16 @@ namespace mtg_library
             addPlatformServices?.Invoke(services);
 
             // add viewmodels
-            services.AddTransient<MainPageViewModel>();
+            services.AddTransient<HomePageViewModel>();
+            services.AddTransient<LibraryPageViewModel>();
+            services.AddTransient<LibraryDetailsViewModel>();
+            //services.AddTransient<DecksPageViewModel>();
 
             // Add services
             services.AddSingleton<IDataContext, DataContext>();
             services.AddSingleton<ScryfallService>();
+
+            services.AddLazyCache();
 
             ServiceProvider = services.BuildServiceProvider ();
         }

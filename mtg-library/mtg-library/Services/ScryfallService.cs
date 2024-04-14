@@ -1,4 +1,5 @@
-﻿using mtg_library.Models;
+﻿using LazyCache;
+using mtg_library.Models;
 using Newtonsoft.Json;
 using System.Threading.Tasks;
 
@@ -6,11 +7,13 @@ namespace mtg_library.Services
 {
     public class ScryfallService
     {
+        private readonly IAppCache appCache;
         RestService _scry;
 
-        public ScryfallService ()
+        public ScryfallService (IAppCache appCache)
         {
-            _scry = new RestService("https://api.scryfall.com");
+            _scry = new RestService(appCache, "https://api.scryfall.com");
+            this.appCache = appCache;
         }
 
         public async Task<Card> GetCard (string id)
