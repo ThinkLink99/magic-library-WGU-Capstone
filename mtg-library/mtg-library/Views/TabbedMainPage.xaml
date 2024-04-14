@@ -8,4 +8,5 @@
     <Views:HomePage Title="Home" />
     <Views:LibraryPage Title="Library" />
     <Views:DecksPage Title="Decks" />
+    <Views:CardListPage Title="Cards" />
 </TabbedPage>

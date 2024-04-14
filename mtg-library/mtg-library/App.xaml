@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="mtg_library.App">
     <Application.Resources>
-        <Style TargetType="StackLayout" />
+        <ResourceDictionary>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
