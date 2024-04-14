@@ -32,9 +32,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Controls\CardFilterView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-    </EmbeddedResource>
     <EmbeddedResource Update="Controls\CardGridView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
