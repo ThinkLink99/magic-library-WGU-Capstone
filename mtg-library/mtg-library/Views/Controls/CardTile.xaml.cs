@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace mtg_library.Controls
+namespace mtg_library.Views.Controls
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CardTile : ContentView

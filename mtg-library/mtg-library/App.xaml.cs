@@ -29,6 +29,7 @@ namespace mtg_library
             services.AddTransient<LibraryPageViewModel>();
             services.AddTransient<LibraryDetailsViewModel>();
             services.AddTransient<CardListPageViewModel>();
+            services.AddTransient<CardDetailsViewModel>();
             //services.AddTransient<DecksPageViewModel>();
 
             // Add services

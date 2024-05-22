@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace mtg_library.Controls
+namespace mtg_library.Views.Controls
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class CardGridView : ContentView, INotifyPropertyChanged
@@ -42,6 +42,15 @@ namespace mtg_library.Controls
         public CardGridView()
         {
             InitializeComponent();
+        }
+
+        private void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var selected = e.CurrentSelection[0] as Card;
+            if (selected != null)
+            {
+                Navigation.PushAsync(new Views.CardDetailsPage(selected));
+            }
         }
     }
 }

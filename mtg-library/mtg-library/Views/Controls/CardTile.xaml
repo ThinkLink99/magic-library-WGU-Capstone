@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="mtg_library.Views.Controls.CardTile"
+             xmlns:models="clr-namespace:mtg_library.Models" 
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:converters="clr-namespace:mtg_library.Resources.Converters"
+             x:DataType="models:Card">
+    <ContentView.Resources>
+        <ResourceDictionary>
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <StackLayout>
+        <yummy:PancakeView Margin="5"
+                    Padding="5"
+                    CornerRadius="0, 0, 25, 25">
+            
+        </yummy:PancakeView>
+        <yummy:PancakeView Margin="5"
+                                CornerRadius="25, 0, 0, 25">
+                <Image Source="{Binding ImageUris.ArtCrop}" 
+                        Aspect="AspectFill" />
+            </yummy:PancakeView>
+        <yummy:PancakeView Margin="5"
+                            Padding="5"
+                            CornerRadius="0, 0, 25, 25">
+            <Label Text="{Binding Name}" />
+        </yummy:PancakeView>
+    </StackLayout>
+</ContentView>

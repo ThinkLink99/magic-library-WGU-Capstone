@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ViewCell xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="mtg_library.Controls.LibraryViewCell"
+             x:Class="mtg_library.Views.Controls.LibraryViewCell"
              xmlns:models="clr-namespace:mtg_library.Models"
              x:DataType="models:Library">
     <ViewCell.View>

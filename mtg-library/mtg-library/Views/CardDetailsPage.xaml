@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
+             xmlns:models="clr-namespace:mtg_library.Models"
+             xmlns:converters="clr-namespace:mtg_library.Resources.Converters"
+             xmlns:viewmodels="clr-namespace:mtg_library.ViewModels"
+             x:Class="mtg_library.Views.CardDetailsPage">
+    <ContentPage.BindingContext>
+        <!--<viewmodels:CardDetailsViewModel />-->
+    </ContentPage.BindingContext>
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converters:ManaSymbolConverter x:Key="ManaSymbolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <StackLayout>
+            <Label Text="{Binding Card.Name}" FontSize="Title" />
+            <Label Text="{Binding Card.TypeLine}" FontSize="Subtitle" TextColor="LightGray" />
+
+            <CollectionView ItemsSource="{Binding CardColors}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout Orientation="Horizontal" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding Converter={StaticResource ManaSymbolConverter}}" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <yummy:PancakeView Margin="5"
+                               Padding="5"
+                               VerticalOptions="Start"
+                               HorizontalOptions="CenterAndExpand">
+            </yummy:PancakeView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

@@ -1,9 +1,8 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             x:Class="mtg_library.Controls.CardGridView"
-             xmlns:Controls="clr-namespace:mtg_library.Controls">
+             x:Class="mtg_library.Views.Controls.CardGridView"
+             xmlns:Controls="clr-namespace:mtg_library.Views.Controls">
   <ContentView.Content>
         <Grid>
             <Grid.RowDefinitions>
@@ -12,17 +11,20 @@
             </Grid.RowDefinitions>
 
             <Label Text="Trading Cards"
-   FontSize="Large"
-   HorizontalOptions="Center"
-   VerticalOptions="CenterAndExpand" />
+                   FontSize="Large"
+                   HorizontalOptions="Center"
+                   VerticalOptions="CenterAndExpand" />
 
             <CollectionView Grid.Row="1"
-            ItemsSource="{Binding Cards}"
-            SelectionMode="None">
+                            ItemsSource="{Binding Cards}"
+                            SelectionMode="Single"
+                            SelectionChanged="CollectionView_SelectionChanged">
+
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout Orientation="Vertical"
-                     Span="2" />
+                                     Span="2" />
                 </CollectionView.ItemsLayout>
+
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Controls:CardTile />

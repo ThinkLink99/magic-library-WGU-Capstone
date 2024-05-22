@@ -4,6 +4,23 @@
              x:Class="mtg_library.App">
     <Application.Resources>
         <ResourceDictionary>
+            <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeBrands">
+                <On Platform="Android" 
+          Value="FontAwesome6Brands.otf#Regular" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeSolid">
+                <On Platform="Android" 
+          Value="FontAwesome6Solid.otf#Regular" />
+            </OnPlatform>
+
+            <OnPlatform x:TypeArguments="x:String" 
+                x:Key="FontAwesomeRegular">
+                <On Platform="Android" 
+          Value="FontAwesome6Regular.otf#Regular" />
+            </OnPlatform>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
