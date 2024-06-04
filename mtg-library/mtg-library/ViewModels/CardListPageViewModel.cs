@@ -5,6 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows.Input;
+using Xamarin.Forms;
 
 namespace mtg_library.ViewModels
 {
@@ -95,13 +99,38 @@ namespace mtg_library.ViewModels
             Cards = new ObservableCollection<Card>();
         }
 
-        public async void FilterCards ()
+        public async Task FilterCards ()
         {
             Cards.Clear();
             var cards = await scryfallService.SearchCards(CardText, new bool[] { FilterBlackMana, FilterBlueMana, FilterRedMana, FilterGreenMana, FilterWhiteMana });
             foreach (var card in cards)
             {
                 Cards.Add(card);
+            }
+        }
+
+        public ICommand FilterCommand =>
+        new Command(async () => {
+           await DelayedQueryForKeyboardTypingSearches().ConfigureAwait(false);
+        });
+        private CancellationTokenSource throttleCts = new CancellationTokenSource();
+        /// <summary>
+        /// Runs in a background thread, checks for new Query and runs current one
+        /// </summary>
+        private async Task DelayedQueryForKeyboardTypingSearches()
+        {
+            try
+            {
+                Interlocked.Exchange(ref this.throttleCts, new CancellationTokenSource()).Cancel();
+                await Task.Delay(TimeSpan.FromMilliseconds(500), this.throttleCts.Token)
+              .ContinueWith(async task => await FilterCards(),
+                            CancellationToken.None,
+                            TaskContinuationOptions.OnlyOnRanToCompletion,
+                            TaskScheduler.FromCurrentSynchronizationContext());
+            }
+            catch
+            {
+                //Ignore any Threading errors
             }
         }
     }

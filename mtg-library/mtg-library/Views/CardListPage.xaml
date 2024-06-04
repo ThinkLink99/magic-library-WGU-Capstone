@@ -2,78 +2,132 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="mtg_library.Views.CardListPage"
-             xmlns:controls="clr-namespace:mtg_library.Views.Controls">
+             xmlns:controls="clr-namespace:mtg_library.Views.Controls"
+             xmlns:toolkit="http://xamarin.com/schemas/2020/toolkit"
+             Appearing="ContentPage_Appearing">
     <ContentPage.Content>
-        <StackLayout>
-            <Frame Padding="5, 0, 5, 0">
-                <StackLayout>
+        <AbsoluteLayout>
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition x:Name="FilterTrayRow" Height="Auto" />
+                    <RowDefinition x:Name="FilterToggleButtonRow" Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+
+                <!-- Filter tray -->
+                <Grid x:Name="FilterTray" BackgroundColor="WhiteSmoke" 
+            Padding="10" TranslationY="-400">
                     <StackLayout>
-                        <Label Text="Search" />
-                        <Entry Placeholder="Enter Card Text to Search" Text="{Binding CardText}" />
+                        <FlexLayout>
+                            <StackLayout>
+                                <Label Text="Card Type" />
+                                <Picker />
+                            </StackLayout>
+                        </FlexLayout>
+                        <Label Text="Filter by Color:" />
+                        <FlexLayout>
+                            <Button x:Name="btnFilterBlackMana" ImageSource="B.svg" Text="Black" Clicked="btnFilterBlackMana_Clicked">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding FilterBlackMana}" Value="true">
+                                        <Setter Property="BackgroundColor" Value="MediumPurple" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button" Binding="{Binding FilterBlackMana}" Value="false">
+                                        <Setter Property="BackgroundColor" Value="LightGray" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                            <Button x:Name="btnFilterBlueMana"  ImageSource="B.svg" Text="Blue" Clicked="btnFilterBlueMana_Clicked">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding FilterBlueMana}" Value="true">
+                                        <Setter Property="BackgroundColor" Value="CornflowerBlue" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button" Binding="{Binding FilterBlueMana}" Value="false">
+                                        <Setter Property="BackgroundColor" Value="LightGray" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                            <Button x:Name="btnFilterRedMana"  ImageSource="B.svg" Text="Red" Clicked="btnFilterRedMana_Clicked">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding FilterRedMana}" Value="true">
+                                        <Setter Property="BackgroundColor" Value="IndianRed" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button" Binding="{Binding FilterRedMana}" Value="false">
+                                        <Setter Property="BackgroundColor" Value="LightGray" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                            <Button x:Name="btnFilterGreenMana"  ImageSource="B.svg" Text="Green" Clicked="btnFilterGreenMana_Clicked">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding FilterGreenMana}" Value="true">
+                                        <Setter Property="BackgroundColor" Value="Green" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button" Binding="{Binding FilterGreenMana}" Value="false">
+                                        <Setter Property="BackgroundColor" Value="LightGray" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                            <Button x:Name="btnFilterWhiteMana"  ImageSource="B.svg" Text="White" Clicked="btnFilterWhiteMana_Clicked">
+                                <Button.Triggers>
+                                    <DataTrigger TargetType="Button" Binding="{Binding FilterWhiteMana}" Value="true">
+                                        <Setter Property="BackgroundColor" Value="AntiqueWhite" />
+                                    </DataTrigger>
+                                    <DataTrigger TargetType="Button" Binding="{Binding FilterWhiteMana}" Value="false">
+                                        <Setter Property="BackgroundColor" Value="LightGray" />
+                                    </DataTrigger>
+                                </Button.Triggers>
+                            </Button>
+                        </FlexLayout>
+                        <Button x:Name="btnStartSearch" HorizontalOptions="End"  Text="Filter" Clicked="btnStartSearch_Clicked" />
                     </StackLayout>
-                    <FlexLayout>
-                        <StackLayout>
-                            <Label Text="Card Type" />
-                            <Picker />
-                        </StackLayout>
-                    </FlexLayout>
-                    <Label Text="Filter by Color:" />
-                    <FlexLayout>
-                        <Button x:Name="btnFilterBlackMana" ImageSource="B.svg" Text="Black" Clicked="btnFilterBlackMana_Clicked">
-                            <Button.Triggers>
-                                <DataTrigger TargetType="Button" Binding="{Binding FilterBlackMana}" Value="true">
-                                    <Setter Property="BackgroundColor" Value="MediumPurple" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="Button" Binding="{Binding FilterBlackMana}" Value="false">
-                                    <Setter Property="BackgroundColor" Value="LightGray" />
-                                </DataTrigger>
-                            </Button.Triggers>
-                        </Button>
-                        <Button x:Name="btnFilterBlueMana"  ImageSource="B.svg" Text="Blue" Clicked="btnFilterBlueMana_Clicked">
-                            <Button.Triggers>
-                                <DataTrigger TargetType="Button" Binding="{Binding FilterBlueMana}" Value="true">
-                                    <Setter Property="BackgroundColor" Value="CornflowerBlue" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="Button" Binding="{Binding FilterBlueMana}" Value="false">
-                                    <Setter Property="BackgroundColor" Value="LightGray" />
-                                </DataTrigger>
-                            </Button.Triggers>
-                        </Button>
-                        <Button x:Name="btnFilterRedMana"  ImageSource="B.svg" Text="Red" Clicked="btnFilterRedMana_Clicked">
-                            <Button.Triggers>
-                                <DataTrigger TargetType="Button" Binding="{Binding FilterRedMana}" Value="true">
-                                    <Setter Property="BackgroundColor" Value="IndianRed" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="Button" Binding="{Binding FilterRedMana}" Value="false">
-                                    <Setter Property="BackgroundColor" Value="LightGray" />
-                                </DataTrigger>
-                            </Button.Triggers>
-                        </Button>
-                        <Button x:Name="btnFilterGreenMana"  ImageSource="B.svg" Text="Green" Clicked="btnFilterGreenMana_Clicked">
-                            <Button.Triggers>
-                                <DataTrigger TargetType="Button" Binding="{Binding FilterGreenMana}" Value="true">
-                                    <Setter Property="BackgroundColor" Value="Green" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="Button" Binding="{Binding FilterGreenMana}" Value="false">
-                                    <Setter Property="BackgroundColor" Value="LightGray" />
-                                </DataTrigger>
-                            </Button.Triggers>
-                        </Button>
-                        <Button x:Name="btnFilterWhiteMana"  ImageSource="B.svg" Text="White" Clicked="btnFilterWhiteMana_Clicked">
-                            <Button.Triggers>
-                                <DataTrigger TargetType="Button" Binding="{Binding FilterWhiteMana}" Value="true">
-                                    <Setter Property="BackgroundColor" Value="AntiqueWhite" />
-                                </DataTrigger>
-                                <DataTrigger TargetType="Button" Binding="{Binding FilterWhiteMana}" Value="false">
-                                    <Setter Property="BackgroundColor" Value="LightGray" />
-                                </DataTrigger>
-                            </Button.Triggers>
-                        </Button>
-                    </FlexLayout>
-                    <Button x:Name="btnStartSearch" HorizontalOptions="End"  Text="Filter" Clicked="btnStartSearch_Clicked" />
+                </Grid>
+
+                <!-- Toggle button -->
+                <StackLayout Grid.Row="1">
+                    <Button x:Name="ToggleFilterTrayButton"
+                        Text="Show Filters"
+                        HorizontalOptions="FillAndExpand"
+                        VerticalOptions="Center"
+                        Clicked="OnToggleFilterTrayButtonClicked" />
+
+                    <BoxView BackgroundColor="LightGray" HeightRequest="1"/>
+
+                    <SearchBar x:Name="FilterTextbox"
+                               Placeholder="Enter Card Text to Search" 
+                               Text="{Binding CardText}"
+                               FontSize="Medium"
+                               HorizontalOptions="CenterAndExpand"
+                               VerticalOptions="Center">
+                        <SearchBar.Behaviors>
+                            <toolkit:EventToCommandBehavior
+                                EventName="TextChanged"
+                                Command="{Binding FilterCommand}" />
+                        </SearchBar.Behaviors>
+                    </SearchBar>
                 </StackLayout>
-            </Frame>
-            <controls:CardGridView />
-        </StackLayout>
+
+                <!-- Main content -->
+                <Grid Grid.Row="2">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
+                    <CollectionView Grid.Row="1"
+                        ItemsSource="{Binding Cards}"
+                        SelectionMode="None">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical"
+                                    Span="2" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <controls:CardTile />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </Grid>
+            </Grid>
+            
+        </AbsoluteLayout>
     </ContentPage.Content>
 </ContentPage>
