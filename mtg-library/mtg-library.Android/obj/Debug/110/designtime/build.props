@@ -11,12 +11,12 @@ androidpackageformat=apk
 embedassembliesintoapk=false
 androidlinkmode=none
 androidlinkskip=
-androidsdkbuildtoolsversion=32.0.0
+androidsdkbuildtoolsversion=30.0.2
 androidsdkpath=c:\program files (x86)\android\android-sdk\
 androidndkpath=
-javasdkpath=c:\program files (x86)\android\openjdk\jdk-17.0.8.101-hotspot\
+javasdkpath=c:\program files\eclipse adoptium\jdk-8.0.362.9-hotspot\
 androidsequencepointsmode=none
-xamarinandroidversion=13.2.2-0
+xamarinandroidversion=12.0.0-3
 monosymbolarchive=false
 androiduselatestplatformsdk=false
 targetframeworkversion=v11.0
@@ -25,11 +25,10 @@ androidgeneratejnimarshalmethods=false
 os=windows_nt
 androidincludedebugsymbols=true
 androidpackagenamingpolicy=lowercasecrc64
-_nugetassetstimestamp=638519175679282744
+_nugetassetstimestamp=638530431636197791
 typemapkind=strings-asm
 androidsupportedabis=arm64-v8a
 armeabi-v7a
 x86
 x86_64
 androidmanifestplaceholders=
-projectfullpath=c:\users\hallt\onedrive\documents\github\magic-library-wgu-capstone\mtg-library\mtg-library.android\mtg-library.android.csproj
