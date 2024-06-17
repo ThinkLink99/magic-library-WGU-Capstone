@@ -2,21 +2,13 @@
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="mtg_library.Views.Controls.CardTile"
-             xmlns:models="clr-namespace:mtg_library.Models" 
-             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView"
-             xmlns:converters="clr-namespace:mtg_library.Resources.Converters"
-             x:DataType="models:Card">
-    <ContentView.Resources>
-        <ResourceDictionary>
-        </ResourceDictionary>
-    </ContentView.Resources>
+             xmlns:yummy="clr-namespace:Xamarin.Forms.PancakeView;assembly=Xamarin.Forms.PancakeView">
     <StackLayout>
         <yummy:PancakeView Margin="5"
                     Padding="5"
                     CornerRadius="0, 0, 25, 25">
-            
         </yummy:PancakeView>
-        <yummy:PancakeView Margin="5"
+        <yummy:PancakeView x:Name="ArtView" Margin="5"
                                 CornerRadius="25, 0, 0, 25">
                 <Image Source="{Binding ImageUris.ArtCrop}" 
                         Aspect="AspectFill" />
@@ -25,6 +17,29 @@
                             Padding="5"
                             CornerRadius="0, 0, 25, 25">
             <Label Text="{Binding Name}" />
+        </yummy:PancakeView>
+        <yummy:PancakeView Margin="5"
+                    Padding="5"
+                    CornerRadius="0, 0, 25, 25"
+                    HorizontalOptions="FillAndExpand">
+            <FlexLayout HorizontalOptions="FillAndExpand">
+                <Button x:Name="SubtractFromLibrary"
+                        Text="-"
+                        HorizontalOptions="Start"
+                        WidthRequest="50"
+                        IsVisible="false"
+                        Clicked="SubtractFromLibrary_Clicked"/>
+                <Entry x:Name="QuantityInLibrary"
+                       Text="{Binding QuantityInLibrary}"
+                       Placeholder="0"
+                       HorizontalOptions="CenterAndExpand"
+                       IsVisible="false" />
+                <Button x:Name="AddToLibrary"
+                        Text="+"
+                        HorizontalOptions="End" 
+                        WidthRequest="50"
+                        Clicked="AddToLibrary_Clicked"/>
+            </FlexLayout>
         </yummy:PancakeView>
     </StackLayout>
 </ContentView>

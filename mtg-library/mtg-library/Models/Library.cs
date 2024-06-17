@@ -13,6 +13,5 @@ namespace mtg_library.Models
         public DateTime CreatedDate { get; set; }
         public DateTime LastUpdated { get; set; }
         public string Status { get; set; }
-
     }
 }

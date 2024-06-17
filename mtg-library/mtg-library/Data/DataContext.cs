@@ -10,9 +10,11 @@ using System.Linq;
 
 namespace mtg_library.Data
 {
-    public class DataContext : IDataContext
+    public class DataContext : IDataContext, IDisposable
     {
         private readonly SQLiteAsyncConnection _database;
+        private bool _disposed;
+
         public DataContext()
         {
              var databasePath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "MyData.db");
@@ -23,6 +25,7 @@ namespace mtg_library.Data
                 _database.CreateTableAsync<Library>().Wait();
                 _database.CreateTableAsync<LibraryCard>().Wait();
 
+                PopulateMockData();
 
                 if (false)
                 {
@@ -36,12 +39,21 @@ namespace mtg_library.Data
             }
         }
 
+        private async Task PopulateMockData ()
+        {
+            if ((await RetrieveLibrariesAsync()).Count > 0) { return; }
+
+            UserPrefs.Instance.ActiveLibraryId = await CreateLibraryAsync(DateTime.Now, "active");
+        }
+
         /* Card CRUD Operations */
 
         /* Library CRUD Operations */
-        public async Task<int> CreateLibraryAsync(DateTime createDate, string status) 
-        { 
-            return await _database.InsertAsync(new Library() { Id = Guid.NewGuid(), Name = "New Library", CreatedDate = createDate, Status = status, LastUpdated = createDate });
+        public async Task<Guid> CreateLibraryAsync(DateTime createDate, string status) 
+        {
+            var lib = new Library() { Id = Guid.NewGuid(), Name = "New Library", CreatedDate = createDate, Status = status, LastUpdated = createDate };
+            await _database.InsertAsync(lib);
+            return lib.Id;
         }
         public async Task<Library> RetrieveLibraryAsync(string libraryId) 
         {
@@ -63,9 +75,20 @@ namespace mtg_library.Data
         }
 
         /* LibraryCard CRUD Operations */
-        public Task<int> CreateLibraryCardAsync(string libraryId, string cardId) 
+        public async Task<int> CreateLibraryCardAsync(string libraryId, string cardId) 
         {
-            throw new NotImplementedException();
+            return await _database.InsertAsync(new LibraryCard() { LibraryId = Guid.Parse(libraryId), CardId = Guid.Parse(cardId) });
+        }
+        public async Task<int> CreateLibraryCardAsync(string libraryId, string cardId, int quantity)
+        {
+            return await _database.InsertAsync(new LibraryCard() { LibraryId = Guid.Parse(libraryId), CardId = Guid.Parse(cardId), Quantity = quantity });
+        }
+        public async Task<bool> LibraryCardExists(string libraryId, string cardId)
+        {
+            return (await _database.Table<LibraryCard>().ToListAsync())
+                                  .Where(L => L.LibraryId == Guid.Parse(libraryId) &&
+                                              L.CardId == Guid.Parse(cardId))
+                                  .Any();
         }
         public async Task<LibraryCard> RetrieveLibraryCardAsync(string libraryId, string cardId) 
         { 
@@ -80,13 +103,38 @@ namespace mtg_library.Data
                                   .Where(L => L.LibraryId == Guid.Parse(libraryId))
                                   .ToList();
         }
-        public Task<int> UpdateLibraryCardAsync(LibraryCard libraryCard) 
+        public async Task<int> UpdateLibraryCardAsync(LibraryCard libraryCard) 
         { 
-            throw new NotImplementedException();
+            return await _database.UpdateAsync(libraryCard);
         }
         public Task<int> DeleteLibraryCardAsync(string libraryId, string cardId) 
         { 
             throw new NotImplementedException();
+        }
+
+        public void Dispose()
+        {
+            // Dispose of unmanaged resources.
+            Dispose(true);
+            // Suppress finalization.
+            GC.SuppressFinalize(this);
+        }
+        protected virtual void Dispose(bool disposing)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                // TODO: dispose managed state (managed objects).
+            }
+
+            // TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+            // TODO: set large fields to null.
+
+            _disposed = true;
         }
     }
 }

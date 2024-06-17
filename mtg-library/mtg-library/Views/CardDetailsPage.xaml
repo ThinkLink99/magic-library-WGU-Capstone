@@ -5,35 +5,56 @@
              xmlns:models="clr-namespace:mtg_library.Models"
              xmlns:converters="clr-namespace:mtg_library.Resources.Converters"
              xmlns:viewmodels="clr-namespace:mtg_library.ViewModels"
-             x:Class="mtg_library.Views.CardDetailsPage">
-    <ContentPage.BindingContext>
-        <!--<viewmodels:CardDetailsViewModel />-->
-    </ContentPage.BindingContext>
+             x:Class="mtg_library.Views.CardDetailsPage"
+             Appearing="ContentPage_Appearing">
     <ContentPage.Resources>
         <ResourceDictionary>
             <converters:ManaSymbolConverter x:Key="ManaSymbolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="{Binding Card.Name}" FontSize="Title" />
-            <Label Text="{Binding Card.TypeLine}" FontSize="Subtitle" TextColor="LightGray" />
-
-            <CollectionView ItemsSource="{Binding CardColors}">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout Orientation="Horizontal" />
-                </CollectionView.ItemsLayout>
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <Image Source="{Binding Converter={StaticResource ManaSymbolConverter}}" />
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            <yummy:PancakeView Margin="5"
-                               Padding="5"
-                               VerticalOptions="Start"
-                               HorizontalOptions="CenterAndExpand">
-            </yummy:PancakeView>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout>
+                <Label Text="{Binding Card.Name}" FontSize="Title" FontAttributes="Bold" />
+                <Label Text="{Binding Card.TypeLine}" FontSize="Subtitle" TextColor="LightGray" />
+                <BoxView Color="Black" HeightRequest="1" />
+                <Label Text="Card Text" FontSize="Large" FontAttributes="Bold" />
+                <Label Text="{Binding Card.OracleText}" FontSize="Body" />
+                <BoxView Color="Black" HeightRequest="1" />
+                <FlexLayout>
+                    <Label Text="Mana Cost: " FontSize="Medium" FontAttributes="Bold" />
+                    <Label Text="{Binding Card.ConvertedManaCost}" FontSize="Medium" />
+                </FlexLayout>
+                <BoxView Color="Black" HeightRequest="1" />
+                <FlexLayout>
+                    <Label Text="Current Price: " FontSize="Medium" FontAttributes="Bold" />
+                    <Label Text="$" FontSize="Medium" TextColor="Green"/>
+                    <Label Text="{Binding Card.Prices.USD}" FontSize="Medium" TextColor="Green" />
+                </FlexLayout>
+                <yummy:PancakeView Margin="5"
+                   Padding="5"
+                   VerticalOptions="Start"
+                   HorizontalOptions="CenterAndExpand">
+                </yummy:PancakeView>
+                <BoxView Color="Black" HeightRequest="1" />
+                <!--<Image Source="{Binding Card.ImageUris.Png}" />-->
+                <BoxView Color="Black" HeightRequest="1" />
+                <Label Text="Quantity in Library"
+                       HorizontalOptions="CenterAndExpand"
+                       FontSize="Medium" />
+                <FlexLayout AlignContent="Stretch" 
+                            AlignItems="Stretch"
+                            JustifyContent="Center">
+                    <Button x:Name="SubtractFromLibrary"
+                            Text="-"
+                            Clicked="SubtractFromLibrary_Clicked"/>
+                    <Entry  x:Name="QuantityInLibrary"
+                            Text="{Binding LibraryCard.Quantity}" />
+                    <Button x:Name="AddToLibrary"
+                            Text="+"
+                            Clicked="AddToLibrary_Clicked"/>
+                </FlexLayout>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </ContentPage>

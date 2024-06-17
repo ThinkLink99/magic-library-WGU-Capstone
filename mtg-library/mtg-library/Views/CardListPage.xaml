@@ -77,7 +77,6 @@
                                 </Button.Triggers>
                             </Button>
                         </FlexLayout>
-                        <Button x:Name="btnStartSearch" HorizontalOptions="End"  Text="Filter" Clicked="btnStartSearch_Clicked" />
                     </StackLayout>
                 </Grid>
 
@@ -114,14 +113,15 @@
 
                     <CollectionView Grid.Row="1"
                         ItemsSource="{Binding Cards}"
-                        SelectionMode="None">
+                        SelectionMode="Single"
+                        SelectionChanged="CollectionView_SelectionChanged">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical"
                                     Span="2" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <controls:CardTile />
+                                <controls:CardTile Card="{Binding}" />
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

@@ -1,4 +1,5 @@
-﻿using mtg_library.ViewModels;
+﻿using mtg_library.Models;
+using mtg_library.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,50 +25,42 @@ namespace mtg_library.Views
             BindingContext = App.GetViewModel<CardListPageViewModel>();
         }
 
-        private void btnFilterBlackMana_Clicked(object sender, EventArgs e)
+        private async void btnFilterBlackMana_Clicked(object sender, EventArgs e)
         {
             ViewModel.FilterBlackMana = !ViewModel.FilterBlackMana;
+            await ViewModel.FilterCards();
         }
-        private void btnFilterBlueMana_Clicked(object sender, EventArgs e)
+        private async void btnFilterBlueMana_Clicked(object sender, EventArgs e)
         {
             ViewModel.FilterBlueMana = !ViewModel.FilterBlueMana;
+            await ViewModel.FilterCards();
         }
-        private void btnFilterRedMana_Clicked(object sender, EventArgs e)
+        private async void btnFilterRedMana_Clicked(object sender, EventArgs e)
         {
             ViewModel.FilterRedMana = !ViewModel.FilterRedMana;
+            await ViewModel.FilterCards();
         }
-        private void btnFilterGreenMana_Clicked(object sender, EventArgs e)
+        private async void btnFilterGreenMana_Clicked(object sender, EventArgs e)
         {
             ViewModel.FilterGreenMana = !ViewModel.FilterGreenMana;
+            await ViewModel.FilterCards();
         }
-        private void btnFilterWhiteMana_Clicked(object sender, EventArgs e)
+        private async void btnFilterWhiteMana_Clicked(object sender, EventArgs e)
         {
             ViewModel.FilterWhiteMana = !ViewModel.FilterWhiteMana;
-        }
-
-        private void btnStartSearch_Clicked(object sender, EventArgs e)
-        {
-            ViewModel.FilterCards();
+            await ViewModel.FilterCards();
         }
 
         private async void OnToggleFilterTrayButtonClicked(object sender, EventArgs e)
         {
             if (isFilterTrayVisible)
             {
-                // Slide out
-                //await Task.WhenAll(
-                      //ToggleFilterTrayButton.TranslateTo(0, 0, 250, Easing.SinIn)
-                    //);
                 await FilterTray.TranslateTo(0, -400, 250, Easing.SinIn);
                 FilterTrayRow.Height = new GridLength(0);
                 ToggleFilterTrayButton.Text = "Show Filters";
             }
             else
             {
-                // Slide in
-                //await Task.WhenAll(
-                     //ToggleFilterTrayButton.TranslateTo(0, FilterTray.Bounds.Bottom, 250, Easing.SinOut)
-                    //);
                 FilterTrayRow.Height = GridLength.Auto;
                 await FilterTray.TranslateTo(0, 0, 250, Easing.SinOut);
                 ToggleFilterTrayButton.Text = "Hide Filters";
@@ -81,9 +74,19 @@ namespace mtg_library.Views
             FilterTrayRow.Height = new GridLength(0);
         }
 
-        private void FilterTextbox_TextChanged(object sender, TextChangedEventArgs e)
+        private async void FilterTextbox_TextChanged(object sender, TextChangedEventArgs e)
         {
-            ViewModel.FilterCards();
+            await ViewModel.FilterCards();
+        }
+
+        private async void CollectionView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (e.CurrentSelection.Count == 0) { return; }
+
+            var card = e.CurrentSelection[0] as Card;
+            ((CollectionView)sender).SelectedItem = null;
+
+            await Navigation.PushAsync(new CardDetailsPage(card));
         }
     }
 }

@@ -15,6 +15,7 @@ namespace mtg_library
         {
             InitializeComponent();
             ConfigureServices(addPlatformServices);
+
             MainPage = new NavigationPage(new Views.TabbedMainPage());
         }
 
@@ -43,6 +44,7 @@ namespace mtg_library
 
         protected override void OnStart()
         {
+
         }
 
         protected override void OnSleep()
@@ -54,5 +56,20 @@ namespace mtg_library
         }
 
         public static BaseViewModel GetViewModel<TViewModel>() where TViewModel : BaseViewModel => ServiceProvider.GetService<TViewModel>();
+    }
+
+    public class UserPrefs
+    {
+        private static UserPrefs _instance;
+        public static UserPrefs Instance 
+        { 
+            get 
+            {
+                if (_instance == null ) { _instance = new UserPrefs(); }
+                return _instance;
+            } 
+        }
+
+        public Guid ActiveLibraryId { get; set; }
     }
 }

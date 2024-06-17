@@ -9,14 +9,14 @@
     <TabbedPage.BarBackgroundColor>#261538</TabbedPage.BarBackgroundColor>
   <!--Pages can be added as references or inline-->
 
-    <Views:CardDetailsPage Title="Home">
-        <Views:CardDetailsPage.IconImageSource>
+    <Views:HomePage Title="Home">
+        <Views:HomePage.IconImageSource>
             <FontImageSource
                 FontFamily="{StaticResource FontAwesomeSolid}"
                 Glyph="{x:Static fontawesome:FontAwesomeIcons.House}"
                 Size="30"/>
-        </Views:CardDetailsPage.IconImageSource>
-    </Views:CardDetailsPage>
+        </Views:HomePage.IconImageSource>
+    </Views:HomePage>
     <Views:CardListPage Title="Search">
         <Views:CardListPage.IconImageSource>
             <FontImageSource

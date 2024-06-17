@@ -18,8 +18,6 @@ namespace mtg_library.Views
         {
             InitializeComponent();
             BindingContext = App.GetViewModel<CardDetailsViewModel>();
-
-            ViewModel.GetCardDetails(Guid.Parse("56ebc372-aabd-4174-a943-c7bf59e5028d"));
         }
         public CardDetailsPage(Models.Card card)
         {
@@ -27,6 +25,23 @@ namespace mtg_library.Views
 			BindingContext = App.GetViewModel<CardDetailsViewModel>();
 
             ViewModel.Card = card;
+        }
+
+        private async void SubtractFromLibrary_Clicked(object sender, EventArgs e)
+        {
+            ViewModel.DecreaseQuantity();
+            await ViewModel.UpdateLibraryCard();
+        }
+
+        private async void AddToLibrary_Clicked(object sender, EventArgs e)
+        {
+            ViewModel.IncreaseQuantity();
+            await ViewModel.UpdateLibraryCard();
+        }
+
+        private async void ContentPage_Appearing(object sender, EventArgs e)
+        {
+            await ViewModel.GetLibraryCard();
         }
     }
 }
