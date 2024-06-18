@@ -6,6 +6,19 @@
              Appearing="ContentPage_Appearing">
     <ContentPage.Content>
         <StackLayout>
+            <StackLayout>
+                <Entry Text="{Binding Library.Name}"
+                       TextColor="Black"
+                       FontSize="24"
+                       TextChanged="Entry_TextChanged"/>
+                <Label Text="{Binding Library.Id}"
+                       TextColor="LightGray"
+                       FontSize="6" />
+                <Label Text="{Binding Library.Status}"
+                       TextColor="LightGray"
+                       FontSize="12" />
+            </StackLayout>
+
             <controls:CardGridView />
         </StackLayout>
     </ContentPage.Content>

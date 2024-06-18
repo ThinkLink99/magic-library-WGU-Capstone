@@ -7,11 +7,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace mtg_library.ViewModels
 {
     public class LibraryDetailsViewModel : BaseViewModel
     {
+        const int DEBOUNCE_TIME = 1000;
+        bool _timerStarted = false;
+
         private Library _library;
         private readonly ScryfallService scryfallService;
         private readonly IDataContext context;
@@ -27,6 +31,14 @@ namespace mtg_library.ViewModels
                 OnPropertyChanged(nameof(Cards));
             }
         }
+        public Library Library 
+        { 
+            get => _library;
+            set {
+                _library = value;
+                OnPropertyChanged();
+            } 
+        }
 
         public LibraryDetailsViewModel(ScryfallService scryfallService, IDataContext context)
         {
@@ -36,11 +48,25 @@ namespace mtg_library.ViewModels
         }
         public async Task GetLibraryDetails(Guid id)
         {
-            _library = await context.RetrieveLibraryAsync(id.ToString());
+            Library = await context.RetrieveLibraryAsync(id.ToString());
+        }
+        public void UpdateLibrary ()
+        {
+            if (_timerStarted) return;
+
+            _timerStarted = true;
+
+            Device.StartTimer(TimeSpan.FromMilliseconds(DEBOUNCE_TIME), () =>
+            {
+                context.UpdateLibraryAsync(_library);
+
+                _timerStarted = false;
+                return _timerStarted;
+            });
         }
         public async Task GetLibraryCards ()
         {
-            libraryCards = await context.RetrieveLibraryCardsAsync(_library.Id.ToString());
+            libraryCards = await context.RetrieveLibraryCardsAsync(Library.Id.ToString());
             Cards.Clear();
             foreach (var card in libraryCards)
             {

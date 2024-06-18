@@ -26,5 +26,10 @@ namespace mtg_library.Views
         {
 			await ViewModel.GetLibraryCards();
         }
+
+        private async void Entry_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ViewModel.UpdateLibrary();
+        }
     }
 }
